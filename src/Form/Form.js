@@ -133,49 +133,67 @@ const Form = () => {
     <div className='div-styles'>
         <h2 className='header-style'>Field Builder</h2>
         <form id="builder_form"  onSubmit={handleSubmit}>
+            <div className='inner-containers'>
+            <label className='label-style'>Label</label>
             <input
+                className='label-input'
                 name ="label"
                 type="text"
                 placeholder="Enter Label Text" 
                 value={field.label}
                 onChange={handleChange} required 
             /> 
-            <br/>
-            <input
-                type="checkbox"
-                name="required"
-                onChange={handleCheck}
-                checked={field.required}
-            /> A value is required
-            <br/>
+            </div>
+            <div className='inner-containers'>
+                <label className='type-label'>Type</label>
+                <label className='multiselect'>Multi-select</label>
+                <input
+                    className='type-input'
+                    type="checkbox"
+                    name="required"
+                    onChange={handleCheck}
+                    checked={field.required}
+                /> 
+                <label className='value-selected'>A value is required</label>
+            </div>
+            <div className='inner-containers'>
+            <label className='default-label'>Default Value</label>
             <input 
+                className='default-input'
                 name = "default"
                 type = "text"
                 placeholder='Enter Default Choice' 
                 value={field.default} 
                 onChange={handleChange} 
             /> 
-            <br/>
+            </div>
+            <div className='inner-containers'>
+            <label className='choices-label'>Choices</label>
             <textarea
+                className='choices-input'
                 name="choices"
                 placeholder="Add Choices"
                 onChange={handleChange}
                 value={field.choices}
             />
-            <br/>
+            </div>
             <div style={{ fontSize: 14, color: 'red', marginLeft: '2px' }}>
                 {notifications.duplicatesError}
             </div>
             <div style={{ fontSize: 14, color: 'red' }}>
                 {notifications.choicesError}
             </div>
+            <div className='inner-containers'>
+            <label className='order-label'>Order</label>
             <input
+                className='order-input'
                 type="checkbox"
                 name="displayAlpha"
                 onChange={handleCheck}
                 checked={field.displayAlpha}
-            /> Display Alphabetically
-            <br/>
+            /> 
+            <label className='alpha-label'>Display Alphabetically</label>
+            </div>
             <button type="submit">Save changes</button>
             <button type="submit" onClick={handleClear}>Clear</button>
             <div style={{ fontSize: 18, color: 'green' }}>
