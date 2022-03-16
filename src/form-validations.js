@@ -1,18 +1,18 @@
-const MAX_CHOICES = 50
+const maximum_choices = 50
 
 export function validate (choicesArray) {
 
-  const errors = { duplicatesError: '', choicesError: '', lengthError: '' }
+  const errors = { duplicateChoice: '', maxLimitError: '' }
 
   // Checks for duplicate Choices
   const duplicates = findDuplicates(choicesArray)
   if (duplicates.length !== 0) {
-    errors.duplicatesError = `* Duplicate choices are not allowed. Please remove the following duplicates: ${duplicates.join(', ')}`
+    errors.duplicateChoice = `* Duplicate Choices Found !!! Please Remove: ${duplicates.join(', ')}`
   }
 
   // Choice limit to 50
-  if (choicesArray.length > MAX_CHOICES) {
-    errors.choicesError = `* You have entered ${choicesArray.length} choices (maximum of ${MAX_CHOICES} allowed). Please delete ${choicesArray.length - MAX_CHOICES} before saving. Note: Default Choice should not be deleted.`
+  if (choicesArray.length > maximum_choices) {
+    errors.maxLimitError = `* You have entered ${choicesArray.length} choices (maximum of ${maximum_choices} allowed)`
   }
 
   return errors

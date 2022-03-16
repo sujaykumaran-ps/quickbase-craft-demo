@@ -153,5 +153,20 @@
 
 .button-container {
     text-align: center;
-    margin: 50px 0px 80px 0px;
+    margin: 50px 0px 10px 0px;
+}
+
+.success-message {
+    font-size: 18px;
+    color: #4CAF50;
+    text-align: center;
+    margin: 10px 0px 20px 0px;
+}
+
+.error-message {
+    font-size: 18px;
+    color: red;
+    text-align: center;
+    margin-top: -10px !important;
+    margin-bottom: 20px;
 }

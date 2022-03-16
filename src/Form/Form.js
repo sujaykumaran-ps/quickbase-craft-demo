@@ -12,9 +12,9 @@ const Form = () => {
         displayAlpha: false,
         required: false
     })
-    const [notifications, setNotifications] = useState({
-        duplicatesError: '',
-        choicesError: ''
+    const [errorMessage, setNotifications] = useState({
+        duplicateChoice: '',
+        maxLimitError: ''
     })
     const [created, setCreated] = useState('')
 
@@ -70,35 +70,35 @@ const Form = () => {
         choicesArray = choicesArray.filter(element => (element !== defaultChoice))
         choicesArray = [defaultChoice, ...choicesArray]
         return choicesArray
-  }
-
-  const handleSubmit = event => {
-    event.preventDefault()
-    let choicesArray = getChoices(field.choices, field.displayAlpha)
-    choicesArray = addDefault(field.default, choicesArray)
-    const errors = validate(choicesArray)
-    choicesArray = alphaSort(choicesArray, field.displayAlpha)
-    choicesArray = defFirst(field.default, choicesArray, field.displayAlpha)
-    const choicesString = choicesArray.join('\n')
-    setField({ ...field, default: field.default, choices: choicesString })
-    setNotifications({ ...errors })
-    setCreated('')
-    if (Object.values(errors).every(x => x === '')) {
-       submit(choicesArray)
     }
-  }
 
-  const submit = (choicesArray) => {
+    const handleSubmit = event => {
+        event.preventDefault()
+        let choicesArray = getChoices(field.choices, field.displayAlpha)
+        choicesArray = addDefault(field.default, choicesArray)
+        const errors = validate(choicesArray)
+        choicesArray = alphaSort(choicesArray, field.displayAlpha)
+        choicesArray = defFirst(field.default, choicesArray, field.displayAlpha)
+        const choicesString = choicesArray.join('\n')
+        setField({ ...field, default: field.default, choices: choicesString })
+        setNotifications({ ...errors })
+        setCreated('')
+        if (Object.values(errors).every(x => x === '')) {
+        submit(choicesArray)
+        }
+    }
+    // Form Submit
+    const submit = (choicesArray) => {
     const data = {
-      label: field.label,
-      default: field.default,
-      choices: choicesArray,
-      displayAlpha: field.displayAlpha,
-      required: field.required
+        label: field.label,
+        default: field.default,
+        choices: choicesArray,
+        displayAlpha: field.displayAlpha,
+        required: field.required
     }
-    // POST method to the URL
+    // POST method to the Mocky
     axios.post('http://www.mocky.io/v2/566061f21200008e3aabd919', data)
-        .then(() => setCreated('Field Created successfully !!!'))
+        .then(() => setCreated('Created successfully !!!'))
         .catch(error => {
             this.setState({ errorMessage: error.message });
             console.error('There was an error!', error);
@@ -106,28 +106,29 @@ const Form = () => {
         
         console.log('Field data', data)
     }
-
-  const clearState = () => {
+    // Clearing All States
+    const clearState = () => {
     setField({
-      label: '',
-      default: '',
-      choices: '',
-      displayAlpha: false,
-      required: false
+        label: '',
+        default: '',
+        choices: '',
+        displayAlpha: false,
+        required: false
     })
 
     setNotifications({
-      duplicatesError: '',
-      choicesError: ''
+        duplicateChoice: '',
+        maxLimitError: ''
     })
 
     setCreated('')
-  }
+    }
 
-  const handleClear = e => {
-    e.preventDefault()
-    clearState()
-  }
+    // Clear Inputs
+    const handleClear = e => {
+        e.preventDefault()
+        clearState()
+    }
 
   return (
     <div className='div-styles'>
@@ -157,48 +158,48 @@ const Form = () => {
                 <label className='value-selected'>A value is required</label>
             </div>
             <div className='inner-containers'>
-            <label className='default-label'>Default Value</label>
-            <input 
-                className='default-input'
-                name = "default"
-                type = "text"
-                placeholder='Enter Default Choice' 
-                value={field.default} 
-                onChange={handleChange} 
-            /> 
+                <label className='default-label'>Default Value</label>
+                <input 
+                    className='default-input'
+                    name = "default"
+                    type = "text"
+                    placeholder='Enter Default Choice' 
+                    value={field.default} 
+                    onChange={handleChange} 
+                /> 
             </div>
             <div className='inner-containers'>
-            <label className='choices-label'>Choices</label>
-            <textarea
-                className='choices-input'
-                name="choices"
-                placeholder="Add Choices"
-                onChange={handleChange}
-                value={field.choices}
-            />
+                <label className='choices-label'>Choices</label>
+                <textarea
+                    className='choices-input'
+                    name="choices"
+                    placeholder="Add Choices"
+                    onChange={handleChange}
+                    value={field.choices}
+                />
             </div>
-            <div style={{ fontSize: 14, color: 'red', marginLeft: '2px' }}>
-                {notifications.duplicatesError}
+            <div className='error-message'>
+                {errorMessage.duplicateChoice}
             </div>
-            <div style={{ fontSize: 14, color: 'red' }}>
-                {notifications.choicesError}
+            <div className='error-message'>
+                {errorMessage.maxLimitError}
             </div>
             <div className='inner-containers'>
-            <label className='order-label'>Order</label>
-            <input
-                className='order-input'
-                type="checkbox"
-                name="displayAlpha"
-                onChange={handleCheck}
-                checked={field.displayAlpha}
-            /> 
+                <label className='order-label'>Order</label>
+                <input
+                    className='order-input'
+                    type="checkbox"
+                    name="displayAlpha"
+                    onChange={handleCheck}
+                    checked={field.displayAlpha}
+                /> 
             <label className='alpha-label'>Display Alphabetically</label>
             </div>
             <div className='button-container'>
-            <button className='save-button' title='Save' type="submit">Save changes</button>
-            <button className='clear-button' title='Clear Contents' type="submit" onClick={handleClear}>Clear</button>
+                <button className='save-button' title='Save' type="submit">Save changes</button>
+                <button className='clear-button' title='Clear Contents' type="submit" onClick={handleClear}>Clear</button>
             </div>
-            <div style={{ fontSize: 18, color: 'green' }}>
+            <div className='success-message'>
                 {created}
             </div>
         </form>
