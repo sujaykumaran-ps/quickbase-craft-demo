@@ -194,8 +194,10 @@ const Form = () => {
             /> 
             <label className='alpha-label'>Display Alphabetically</label>
             </div>
-            <button type="submit">Save changes</button>
-            <button type="submit" onClick={handleClear}>Clear</button>
+            <div className='button-container'>
+            <button className='save-button' title='Save' type="submit">Save changes</button>
+            <button className='clear-button' title='Clear Contents' type="submit" onClick={handleClear}>Clear</button>
+            </div>
             <div style={{ fontSize: 18, color: 'green' }}>
                 {created}
             </div>

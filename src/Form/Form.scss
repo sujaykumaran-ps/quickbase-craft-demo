@@ -32,7 +32,7 @@
 
 .label-input {
     position: relative;
-    left: 400px;
+    left: 401px;
     padding: 10px 10px 12px 10px;
     border: 1.5px solid rgb(148, 148, 148);
     border-radius: 6px;
@@ -90,6 +90,7 @@
     font-weight: 600;
     position: relative;
     left: 230px; 
+    vertical-align: top;
 }
 
 .choices-input {
@@ -101,7 +102,7 @@
     color: rgb(51, 51, 51);
     width: 300px;
     font-size: 17px;
-    height: 100px;
+    height: 150px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -120,4 +121,37 @@
     position: relative;
     left: 400px;
     font-size: 18px !important;
-}   
+}
+
+.save-button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.clear-button {
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    background:none;
+    font-size: 20px;
+    color: red;
+    font-weight: 600;
+    margin-left: 20px;
+}
+
+.save-button:hover {
+    background-color: #3e8e41;
+}
+
+.button-container {
+    text-align: center;
+    margin: 50px 0px 80px 0px;
+}
